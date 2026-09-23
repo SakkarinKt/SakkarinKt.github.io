@@ -1,0 +1,98 @@
+---
+title: janus-chrysalis
+tagline: Open research on world models in multi-agent RL, trained in TypeScript, co-authored with Claude, and published even when the effect disappears.
+tier: lead
+order: 1
+status: active
+evidence: null-result
+visibility: public
+period: { start: '2026-07' }
+asOf: '2026-09-23'
+tldr: >-
+  Can you measure how much a world model's prediction error comes from the other agent's learning,
+  rather than from the model just being new? I built a freeze-intervention instrument to isolate that
+  signal in a two-agent gridworld. The first 9 seeds looked significant (p ≈ 0.039). A pre-registered
+  replication took it to p ≈ 0.388, so the write-up reports a null result. The work runs as a
+  human + Claude collaboration: a daily autonomous agent opens PRs, and I review and merge them.
+stack: [TypeScript, TensorFlow.js (tfjs-node), Node 22, RSSM / Dreamer-style world model, node:test]
+tags: [world models, multi-agent RL, agentic workflows, null result, pre-registration, research process]
+links:
+  - { label: Repository, href: 'https://github.com/SakkarinKt/janus-chrysalis', kind: repo }
+  - { label: Proposal 0001, href: 'https://github.com/SakkarinKt/janus-chrysalis/blob/main/docs/proposals/0001-direct-nonstationarity-measurement.md', kind: doc }
+  - { label: Daily stand-ups, href: 'https://github.com/SakkarinKt/janus-chrysalis/tree/main/reports/standup', kind: doc }
+metrics:
+  - { label: Pre-registered replication, value: 'p ≈ 0.388', n: '12 seeds, 8 negative', baseline: 'p ≈ 0.039 at n = 9', caveat: did not replicate }
+  - { label: G2 loss-curve gate, value: 6 / 6 pass, n: '3 seeds × 2 agents', caveat: 'total loss 2.2–2.9 → 1.4–1.8 over 20 episodes' }
+  - { label: Test suite, value: 165 passing, n: '177 tests, 12 todo, 0 fail' }
+  - { label: Autonomous loop, value: 77 stand-ups, n: 'Jul – Sep 2026' }
+honestLimits:
+  - The instrument signal did not replicate. Pooled over 12 seeds it's indistinguishable from noise (two-sided exact sign test, p ≈ 0.388).
+  - 'The KL term sits at the 1.1-nat free-bits floor for the whole run, so any drift below about 1 nat is invisible to it. The audit flags this as a known blind spot.'
+  - It's a toy 8 × 8 two-agent gridworld on a laptop. Nothing here says anything about scale yet.
+  - Only Arm A (independent world models) has been run. The topology comparison that motivates the project is still design-only.
+size: { loc: '~10k TypeScript', tests: '165 passing' }
+---
+
+## Problem
+
+In multi-agent RL, every agent's environment includes the other agents, and they keep learning. A
+world model trained on yesterday's partner is quietly wrong about today's. Papers in this space
+name that co-learning non-stationarity as a design target, but they only report its downstream
+effects: return and sample efficiency. None of the eight multi-agent papers in the project's
+literature map **measures** it directly.
+
+The research question
+([proposal 0001](https://github.com/SakkarinKt/janus-chrysalis/blob/main/docs/proposals/0001-direct-nonstationarity-measurement.md))
+is whether the part of world-model error caused by a partner's policy drift can be isolated. If it
+can, the next question is whether its size depends on how the agents share world models:
+independent, peer comms, centralized aggregation, or one shared model.
+
+## Approach
+
+**The instrument.** Two agents train together. At a fixed step one agent is *frozen*: its world
+model stops updating, but it keeps predicting. Compare its prediction error when the partner keeps
+learning against a paired run where the partner is frozen too. Both runs start from identical
+initial conditions (checked by a pre-freeze parity assertion). The difference between them is the
+error attributable to partner drift.
+
+**The stack is TypeScript end to end.** The RSSM is written in TensorFlow.js: deterministic plus
+stochastic latent state, KL with free bits, and λ-returns for the actor-critic. JavaScript is an
+almost empty niche for multi-agent world models, and it means the final demo can run in a browser.
+
+**The process is part of the experiment.** A scheduled Claude agent runs once a day in the cloud.
+It reads a standing goal file, does one bounded increment, and opens a PR with a stand-up report:
+what was done, what was learned, and which decisions it needs from me. I review every PR. Any
+irreversible decision becomes an Architecture Decision Record, and nothing merges until I approve
+it. Some modules are written by me and reviewed by Claude, which flips the roles. No claim enters
+the write-up without an adversarial review in a fresh session.
+
+### Why pre-register
+
+After 9 seeds, 8 went the same direction (p ≈ 0.039). That's the moment it becomes tempting to take
+"one more look" after each inconclusive run. So the replication's seed count and pass criterion were
+written into the PR *before* running anything, with a partner-view radius chosen so the partner is
+visible on every post-freeze step by construction.
+
+## Architecture
+
+<Diagram name="janus" caption="Human + agent research loop around the freeze-intervention instrument" />
+
+## Results
+
+| Check | Result | n | Read it as |
+| --- | --- | --- | --- |
+| Drift-attributable error, radius 6 | 8 of 9 seeds negative, p ≈ 0.039 | 9 seeds | Looked like a signal |
+| Pre-registered replication (partner always visible) | 3 of 3 fresh seeds **positive** (+0.008, +0.032, +0.008) | 3 seeds | Opposite sign |
+| Pooled | 8 of 12 negative, p ≈ 0.388 | 12 seeds | **Null result**, reported as such |
+| G2 loss-curve gate | total loss 2.2–2.9 → 1.4–1.8 over 20 episodes, all pass | 3 seeds × 2 agents | The training path works |
+| Test suite | 165 pass, 12 todo, 0 fail | 177 tests | Sep 2026 audit baseline |
+
+<HonestLimits />
+
+## What’s next
+
+- **Gate G2**: finish validating the Arm-A instrument, then decide, before any cross-topology
+  sweep, whether the free-bits floor needs lowering so small drifts become measurable.
+- **Arms B–D** (peer comms, centralized aggregation, one shared model) stay design-only until G2
+  passes. The Arm-D metric needs fixing first: shared weights mix two effects.
+- **A browser demo** where the trained world model runs client-side on WebGPU.

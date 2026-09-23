@@ -1,0 +1,70 @@
+---
+title: MaxEnt actor-critic for portfolio allocation
+tagline: A reproducible Soft Actor-Critic research harness for long-only allocation. Built properly, measured against baselines, and not yet beating them.
+tier: case-study
+order: 2
+status: paused
+evidence: inconclusive
+visibility: public
+period: { start: '2026-04', end: '2026-05' }
+asOf: '2026-09-23'
+tldr: >-
+  A SAC-style max-entropy agent that allocates daily across SPY, QQQ, TLT, GLD and cash. The point is
+  the harness: seeded runs, config snapshots, a six-way ablation sweep, and baselines evaluated the
+  same way as the agent. On real data its validation Sharpe (2.00) edges past equal-weight (1.67)
+  and random (1.75). That's a single seed with a worse drawdown, so I don't read it as an edge.
+stack: [Python, PyTorch, Gymnasium-style env, 'SAC (twin Q, auto-entropy)', YAML configs, pytest]
+tags: [reinforcement learning, quant finance, experiment design]
+links:
+  - { label: Repository, href: 'https://github.com/SakkarinKt/maxent-actorcritic-portfolio', kind: repo }
+metrics: []
+honestLimits:
+  - Single seed (7). Validation split only; the held-out test split has not been run.
+  - The agent's max drawdown (−8.0%) is worse than equal-weight (−4.4%) over the same window.
+  - Turnover of 0.007 means it learned a nearly static allocation. The Sharpe gap probably reflects which static mix it picked, not skill at trading.
+  - The ablation sweep ran on the synthetic data generator, so it validates the harness, not the strategy.
+size: { loc: '~1.5k Python', tests: '13 tests' }
+---
+
+## Problem
+
+RL papers for portfolio allocation often report one striking backtest. What's usually missing is
+what's needed to believe it: fixed seeds, the exact config, ablations that show which ingredient
+matters, and naive baselines scored on the same split with the same metrics. I wanted a harness
+where an "RL beats the market" result would have to survive all of that first.
+
+## Approach
+
+- **Environment:** daily, long-only, no leverage, with an explicit cash bucket. The observation is
+  a rolling feature window plus current weights. Actions are target weights, projected onto the
+  simplex with a softmax. Reward is log growth after transaction costs, with optional volatility
+  and drawdown penalties.
+- **Agent:** SAC with a tanh-squashed Gaussian actor, twin Q-networks with target networks, and
+  automatic entropy tuning. Version 2 adds validation-driven checkpoint selection and
+  benchmark-relative rewards.
+- **Discipline:** every run writes its config snapshot and seed. The ablation runner applies six
+  overrides: entropy off, low and high transaction cost, risk penalty on, short and long window.
+  Buy-and-hold, periodic rebalance and a random policy are scored on the same split.
+
+## Architecture
+
+<Diagram name="maxent" caption="Config-driven training, ablation, and evaluation pipeline" />
+
+## Results
+
+Real market data, validation split, seed 7:
+
+| Policy | Sharpe | Max drawdown | Ann. return | Turnover |
+| --- | --- | --- | --- | --- |
+| SAC agent | 2.00 | −8.0% | 18.2% | 0.007 |
+| Random policy | 1.75 | −4.6% | 18.0% | 0.865 |
+| Equal-weight (buy & hold) | 1.67 | −4.4% | 14.1% | 0 |
+
+<HonestLimits />
+
+## What’s next
+
+- Multi-seed runs with confidence intervals, then the held-out test split, *once*.
+- Re-run the ablation sweep on real data. The synthetic generator was there to prove the harness,
+  not the strategy.
+- Walk-forward evaluation across regimes before any claim about skill.
