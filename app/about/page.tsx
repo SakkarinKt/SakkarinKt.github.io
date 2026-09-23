@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 
 const path = [
 	{ year: '2017', place: 'Mahidol University · TH', step: 'Actuarial science', note: 'Learned to price risk and distrust a single number.' },
-	{ year: '2020', place: 'Tri Petch IT · TH', step: 'Data analyst', note: 'First predictive model in production, for Isuzu marketing campaigns.' },
-	{ year: 'MSc · 2024', place: 'NTHU · TW', step: 'MSc, reinforcement learning', note: 'Moved to Taiwan. Inverse RL for autonomous driving.' },
-	{ year: 'since 2023', place: 'SystemWeb · TW', step: 'Software developer', note: 'Audited fund-administration systems in C#.' },
+	{ year: '2020', place: 'Tri Petch IT · TH', step: 'Data analyst', note: 'Built a predictive model to target Isuzu marketing campaigns.' },
+	{ year: '2020 – 2024', place: 'NTHU · TW', step: 'MSc, reinforcement learning', note: 'Moved to Taiwan. Inverse RL for autonomous driving.' },
+	{ year: 'since 2023', place: 'SystemWeb · TW', step: 'Software developer', note: 'Fund-administration software in C#: portfolio management, now transfer agency.' },
 	{ year: 'now', place: 'nights & weekends', step: 'AI engineering, in public', note: 'World models, RL, agentic LLM systems, co-built with Claude.' },
 ];
 

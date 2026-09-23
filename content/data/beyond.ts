@@ -8,16 +8,16 @@ export const beyond: Hobby[] = [
 	{
 		emoji: '🥋',
 		title: 'Brazilian jiu-jitsu',
-		body: 'The most honest feedback loop I know: bad policy, immediate negative reward. TODO(owner): belt / gym / how long you have been rolling.',
+		body: 'The most honest feedback loop I know: bad policy, immediate negative reward.',
 	},
 	{
 		emoji: '🍳',
 		title: 'Cooking',
-		body: 'Recipe testing is just hyperparameter search with better snacks. TODO(owner): a signature dish.',
+		body: 'Recipe testing is just hyperparameter search with better snacks.',
 	},
 	{
 		emoji: '🎬',
 		title: 'Films',
-		body: 'TODO(owner): two or three films you keep recommending.',
+		body: 'How I switch my brain off after a long training run. Somebody else’s story, somebody else’s decisions.',
 	},
 ];
