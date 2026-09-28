@@ -5,19 +5,15 @@ export interface Value {
 
 export const values: Value[] = [
 	{
-		label: 'I publish my null results',
-		body: 'janus-chrysalis pre-registered a replication, the effect vanished (p≈0.039 → 0.388), and the write-up says so. A result that only survives in the slide deck is not a result.',
+		label: 'Plan first, read widely, then go explore',
+		body: 'Most of my projects start life as a plan doc and a reading list. janus-chrysalis keeps notes on every paper it leans on. Then I try the new approach anyway, because that’s the fun part, and the plan tells me whether it actually made things better or just made them different.',
 	},
 	{
-		label: 'Agents propose, I review & merge',
-		body: 'I co-build with Claude: a scheduled agent does one bounded increment a day and opens a PR with a stand-up report. Irreversible decisions go through ADRs that a human signs off. Autonomy with gates, not vibes.',
+		label: 'Small steps, real numbers',
+		body: 'Ship something small, measure it, then decide. I’d rather show you a modest number I can defend than a big one I can’t. That’s why every number on this site comes with its n, and why one of my favourite results is a null result.',
 	},
 	{
-		label: 'Attach a number, then attach its n',
-		body: 'Every metric on this site says how many seeds, documents, or runs it rests on — and what it does not show. If a number is synthetic, it is labelled synthetic.',
-	},
-	{
-		label: 'Production is the bar',
-		body: 'My day job is audited financial software. That habit carries over: tests, reproducible configs, and flagging “this won’t work” early instead of late.',
+		label: 'Start from the person, not the tech',
+		body: 'Figure out what they actually need first. So far that’s been fund administrators, a Canadian bank’s data team, Thailand’s largest mobile operator, and, for Fortuna, me squinting at my own credit-card statement. The model comes second.',
 	},
 ];

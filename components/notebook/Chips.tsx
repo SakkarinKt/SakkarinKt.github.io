@@ -9,6 +9,7 @@ const EVIDENCE_TONE: Record<Evidence, string> = {
 	'self-check': 'border-rule text-muted',
 	synthetic: 'border-rule text-muted',
 	measured: 'border-teal/40 text-teal',
+	'in-use': 'border-teal/40 text-teal',
 	none: 'border-rule text-muted',
 };
 
@@ -19,6 +20,7 @@ const DOT_TONE: Record<Evidence, string> = {
 	'self-check': 'bg-muted',
 	synthetic: 'bg-muted',
 	measured: 'bg-teal',
+	'in-use': 'bg-teal',
 	none: 'bg-muted',
 };
 

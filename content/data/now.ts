@@ -1,21 +1,21 @@
 export const now = {
-	asOf: '2026-09-23',
+	asOf: '2026-09-28',
 	items: [
 		{
 			label: 'Researching',
-			body: 'janus-chrysalis Phase 2 — the RSSM training path just cleared its loss-curve gate; next is validating the non-stationarity instrument before Gate G2.',
+			body: 'janus-chrysalis Phase 2. The RSSM training path cleared its loss-curve gate; next up is validating the non-stationarity instrument before Gate G2.',
 		},
 		{
-			label: 'Shipping',
-			body: 'The Transfer Agent System at my day job, in C#.',
+			label: 'At work',
+			body: 'Claude Code plugins and a graph-based agent memory for our engineering team, alongside the C# Transfer Agent System.',
 		},
 		{
 			label: 'Learning',
-			body: 'GPU inference — CUDA kernels and serving — so the next RAG project is built on measured latency, not targets.',
+			body: 'The inference layer: CUDA, NVIDIA NIM, NeMo, TensorRT-LLM. The next RAG project gets measured latency, not target latency.',
 		},
 		{
 			label: 'Looking for',
-			body: 'A senior AI Engineer / Data Scientist role where RL or agentic systems meet real users.',
+			body: 'ML / AI Engineer or Forward-Deployed Engineer roles, somewhere models meet real users and slightly messy data.',
 		},
 	],
 } as const;

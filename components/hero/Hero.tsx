@@ -10,7 +10,7 @@ export function Hero({ resume }: { resume: boolean }) {
 		<section id="top" aria-labelledby="hero-title" className="grid gap-12 pt-10 sm:pt-16 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14">
 			<div className="space-y-6">
 				<p className="kicker">
-					{profile.role} · {profile.location} · {profile.timezone}
+					{profile.role} · Taipei
 				</p>
 				<div>
 					<p className="font-display text-3xl font-semibold sm:text-4xl" aria-hidden>

@@ -6,7 +6,7 @@ import { LeadProject } from '@/components/projects/LeadProject';
 import { PlannedList } from '@/components/projects/PlannedList';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { beyond } from '@/content/data/beyond';
-import { experience } from '@/content/data/experience';
+import { CurrentRole } from '@/components/about/CurrentRole';
 import { now } from '@/content/data/now';
 import { profile } from '@/content/data/profile';
 import { values } from '@/content/data/values';
@@ -20,13 +20,12 @@ export default function Home() {
 	const lead = studies.find((s) => s.data.tier === 'lead')!;
 	const others = studies.filter((s) => s !== lead);
 	const posts = getListedPosts().slice(0, 3);
-	const dayJob = experience[0]!;
 
 	const personLd = {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
 		name: profile.name,
-		jobTitle: profile.role,
+		jobTitle: profile.shortRole,
 		url: SITE_URL,
 		email: `mailto:${profile.email}`,
 		address: { '@type': 'PostalAddress', addressLocality: 'Taipei', addressCountry: 'TW' },
@@ -100,8 +99,8 @@ export default function Home() {
 				<PlannedList />
 			</Section>
 
-			<Section id="how-i-work" index="05" title="How I work">
-				<div className="grid gap-6 md:grid-cols-2">
+			<Section id="how-i-work" index="05" title="How I work" kicker="Three habits I keep coming back to, at work and on nights-and-weekends projects.">
+				<div className="grid gap-6 md:grid-cols-3">
 					{values.map((v) => (
 						<div key={v.label} className="card space-y-2 p-6">
 							<h3 className="font-display text-xl font-semibold">{v.label}</h3>
@@ -111,22 +110,18 @@ export default function Home() {
 				</div>
 			</Section>
 
-			<Section id="day-job" index="06" title="Day job" kicker="Production software for regulated finance: where the testing habits come from.">
-				<div className="card grid gap-6 p-6 sm:p-8 md:grid-cols-[14rem_1fr]">
-					<div className="space-y-1">
-						<p className="kicker">{dayJob.period}</p>
-						<p className="font-display text-xl font-semibold">{dayJob.org}</p>
-						<p className="text-muted">{dayJob.title}</p>
-					</div>
-					<ul className="space-y-2 leading-relaxed">
-						{dayJob.points.map((p) => (
-							<li key={p} className="flex gap-3">
-								<span className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
-								{p}
-							</li>
-						))}
-					</ul>
-				</div>
+			<Section
+				id="day-job"
+				index="06"
+				title="Day job"
+				kicker="Where agent tooling meets a real engineering team, and the C# fund systems it helps ship."
+				aside={
+					<Link href="/about/#experience" className="link text-sm">
+						full experience →
+					</Link>
+				}
+			>
+				<CurrentRole />
 			</Section>
 
 			<Section

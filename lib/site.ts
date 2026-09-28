@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://sakkarinkt.github.io';
 export const SITE_NAME = 'Sakkarin Krarat';
 export const SITE_DESCRIPTION =
-	'Sakkarin Krarat — AI/ML engineer in Taipei. Reinforcement learning, world models, and agentic LLM systems, built in public and measured honestly.';
+	'Sakkarin Krarat — ML / AI engineer and forward-deployed engineer in Taipei. Reinforcement learning, world models, and agentic LLM systems, built in public and measured honestly.';
 export const SOURCE_REPO = 'https://github.com/SakkarinKt/SakkarinKt.github.io';
 
 export const NAV = [

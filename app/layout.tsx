@@ -14,7 +14,7 @@ const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', 
 
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
-	title: { default: `${SITE_NAME} — AI/ML Engineer`, template: `%s · ${SITE_NAME}` },
+	title: { default: `${SITE_NAME} — ML / AI Engineer`, template: `%s · ${SITE_NAME}` },
 	description: SITE_DESCRIPTION,
 	authors: [{ name: SITE_NAME, url: SITE_URL }],
 	alternates: { canonical: '/', types: { 'application/rss+xml': [{ url: '/rss.xml', title: `${SITE_NAME} — writing` }] } },

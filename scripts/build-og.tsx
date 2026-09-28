@@ -89,9 +89,9 @@ function clip(s: string, n: number) {
 async function main() {
 	fs.mkdirSync(OUT, { recursive: true });
 	const cards: Card[] = [
-		{ key: 'home', kicker: 'AI/ML engineer · Taipei', title: 'I teach machines to make decisions — and measure whether they did.', subtitle: 'RL · world models · agentic LLM systems' },
+		{ key: 'home', kicker: 'ML / AI engineer · forward-deployed · Taipei', title: 'I teach machines to make decisions — and measure whether they did.', subtitle: 'RL · world models · agentic LLM systems' },
 		{ key: 'projects', kicker: 'work · evidence-labelled', title: 'Case studies, lab bench, and what’s next', subtitle: 'Every metric shows its n. Every case study lists its limits.' },
-		{ key: 'about', kicker: 'about', title: 'Applied math, turned into software you can measure.', subtitle: 'Actuarial science → RL master’s → AI engineering' },
+		{ key: 'about', kicker: 'about', title: 'Applied math, turned into software you can measure.', subtitle: 'Actuarial science → data engineering → RL master’s → AI engineering' },
 		{ key: 'blog', kicker: 'writing', title: 'Lab notes on RL, GPUs, and LLM systems' },
 	];
 	for (const s of getCaseStudies()) {

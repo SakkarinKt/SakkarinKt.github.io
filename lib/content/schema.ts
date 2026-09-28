@@ -10,6 +10,7 @@ export const EVIDENCE = {
 	'self-check': 'self-check',
 	synthetic: 'synthetic only',
 	measured: 'measured',
+	'in-use': 'in daily use',
 	none: 'no results yet',
 } as const;
 export type Evidence = keyof typeof EVIDENCE;

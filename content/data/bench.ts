@@ -13,6 +13,16 @@ export const bench: BenchItem[] = [
 		stack: ['Python', 'MLX', 'Claude CLI'],
 	},
 	{
+		slug: 'fortuna',
+		title: 'Fortuna',
+		oneLiner:
+			'My own iPhone finance app, and yes, I use it daily. An on-device Apple Foundation Model answers budget questions through 5 finance tools; card statements import straight from PDF. No servers, no dependencies.',
+		evidence: 'in-use',
+		chips: ['63 tests', 'local only'],
+		visibility: 'local-only',
+		stack: ['SwiftUI', 'FoundationModels', 'SwiftData'],
+	},
+	{
 		slug: 'constitutional-guardrail-gateway',
 		title: 'constitutional-guardrail-gateway',
 		oneLiner:
@@ -41,26 +51,6 @@ export const bench: BenchItem[] = [
 		chips: ['offline core', '34 tests'],
 		visibility: 'local-only',
 		stack: ['LangGraph', 'pydantic'],
-	},
-	{
-		slug: 'ember',
-		title: 'EMBER',
-		oneLiner:
-			'SQLite-backed agent memory where memories decay and get reinforced, ACT-R style. Storage and brute-force search work; HNSW and benchmarks are next.',
-		evidence: 'none',
-		chips: ['milestone 1'],
-		visibility: 'local-only',
-		stack: ['SQLite', 'Python'],
-	},
-	{
-		slug: 'swift-afm3',
-		title: 'Overture',
-		oneLiner:
-			'On-device iOS “morning brief” that fans out parallel Apple FoundationModels sessions and keeps personal data on the phone.',
-		evidence: 'none',
-		chips: ['mock model only'],
-		visibility: 'local-only',
-		stack: ['SwiftUI', 'FoundationModels'],
 	},
 	{
 		slug: 'rl-from-scratch',
